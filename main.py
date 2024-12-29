@@ -31,7 +31,7 @@ def validate_username(username):
     usersname = re.sub(r'[^a-zA-Z0-9]', '', usersname)
 
     # Limit the usersname length between 3 to 32 characters
-    usersname = usersname[:32] if len(username) > 32 else username
+    username = username[:32] if len(username) > 32 else username
     if len(username) < 3:
         # Append 'Marzneshin' to satisfy the minimum length
         username = username + 'Marzneshin'
