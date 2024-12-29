@@ -196,7 +196,7 @@ def get_x_inbounds_with_uuid(session):
         print("Failed to connect to the get inbounds endpoint.")
 def m_login(session,username, password):
     use_protocol = 'https' if M_HTTPS else 'http'
-    url = f'{use_protocol}://{M_DOMAIN}:{M_PORT}/api/admin/token'
+    url = f'{use_protocol}://{M_DOMAIN}:{M_PORT}/api/admins/token'
     data = {
         'username': M_USERNAME,
         'password': M_PASSWORD
