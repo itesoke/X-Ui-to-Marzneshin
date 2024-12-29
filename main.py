@@ -28,7 +28,7 @@ def validate_username(username):
     username = unicodedata.normalize('NFKD', username).encode('ascii', 'ignore').decode()
 
     # Remove any non-alphanumeric characters
-    usersname = re.sub(r'[^a-zA-Z0-9]', '', usersname)
+    username = re.sub(r'[^a-zA-Z0-9]', '', username)
 
     # Limit the usersname length between 3 to 32 characters
     username = username[:32] if len(username) > 32 else username
