@@ -28,13 +28,13 @@ def validate_username(username):
     username = unicodedata.normalize('NFKD', username).encode('ascii', 'ignore').decode()
 
     # Remove any non-alphanumeric characters
-    username = re.sub(r'[^a-zA-Z0-9]', '', username)
+    usersname = re.sub(r'[^a-zA-Z0-9]', '', usersname)
 
-    # Limit the username length between 3 to 32 characters
-    username = username[:32] if len(username) > 32 else username
+    # Limit the usersname length between 3 to 32 characters
+    usersname = usersname[:32] if len(username) > 32 else username
     if len(username) < 3:
-        # Append 'Marzban' to satisfy the minimum length
-        username = username + 'Marzban'
+        # Append 'Marzneshin' to satisfy the minimum length
+        username = username + 'Marzneshin'
 
     return username
 
@@ -206,7 +206,7 @@ def m_login(session,username, password):
         response = session.post(url, data=data)
         response.raise_for_status()
         access_token = response.json()['access_token']
-        print("Marzban Login Successful.")
+        print("Marzneshin Login Successful.")
         print("-" * 10)
         return access_token
     except requests.exceptions.RequestException as e:
@@ -232,7 +232,7 @@ def get_m_inbounds(session,access_token):
 
 def add_m_user(session, access_token,protocoll, uuid, email, traffic, expiretime, inbounds):
     use_protocol = 'https' if M_HTTPS else 'http'
-    url = f'{use_protocol}://{M_DOMAIN}:{M_PORT}/api/user'
+    url = f'{use_protocol}://{M_DOMAIN}:{M_PORT}/api/users'
     data = {
         "username": email,
         "proxies": {
@@ -316,7 +316,7 @@ def add_m_user(session, access_token,protocoll, uuid, email, traffic, expiretime
 
 def add_m_custom_user(session, access_token,protocoll, uuid, email, traffic, expiretime, inbounds, flow):
     use_protocol = 'https' if M_HTTPS else 'http'
-    url = f'{use_protocol}://{M_DOMAIN}:{M_PORT}/api/user'
+    url = f'{use_protocol}://{M_DOMAIN}:{M_PORT}/api/users'
     data = {
         "username": email,
         "proxies": {
@@ -416,15 +416,15 @@ if __name__ == "__main__":
     if x_login(X_SESSION, X_USERNAME, X_PASSWORD):
         user_data = get_x_inbounds_with_uuid(X_SESSION)
         while True:
-            choice = input("Do you wanna proceed to transfer users To Marzban? (y/n): ").strip().lower()
+            choice = input("Do you wanna proceed to transfer users To Marzneshin? (y/n): ").strip().lower()
             
             if choice == 'y':
                 print("Do you want to Transfer Users by Automatic Method or Manual Method")
-                print("Automatic ==> Grabs Marzban Inbounds and Use All of Them To Create Users + Enable Flow For Vless Protocol")
+                print("Automatic ==> Grabs Marzneshin Inbounds and Use All of Them To Create Users + Enable Flow For Vless Protocol")
                 print("Manual ==> Pick The Inbounds You Want To Use Them in Order To Create Users + Disable/Enable Flow For Vless Protocol\n")
                 auto_manual = input("Enter (a/m) to Continue: ").strip().lower()
                 if auto_manual == "a":
-                    # Getting Marzban Inbounds for Later Use
+                    # Getting Marzneshin Inbounds for Later Use
                     token = m_login(M_SESSION, M_USERNAME, M_PASSWORD)
                     if token:
                         all_inbounds = get_m_inbounds(M_SESSION, token)
@@ -451,7 +451,7 @@ if __name__ == "__main__":
                         trojan_inbounds = ", ".join(protocols.get("trojan", []))
                         shadowsocks_inbounds = ", ".join(protocols.get("shadowsocks", []))
                         add_m_users(M_SESSION, token, user_data,protocols)
-                        print("Users transferred to Marzban Succesfuly.")
+                        print("Users transferred to Marzneshin Succesfuly.")
                 # Manual Adding Inbounds
                 elif auto_manual == "m":
                         token = m_login(M_SESSION, M_USERNAME, M_PASSWORD)
